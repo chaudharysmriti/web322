@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User History</title>
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+    <!-- Hero section displaying userName -->
+    <header>
+        <h1><%= user.userName %></h1> <!-- Displaying username instead of "User History" -->
+    </header>
+
+    <main>
+        <!-- User History Section with email -->
+        <section>
+            <h2>User History: <%= user.email %></h2> <!-- Displaying email below the username -->
+        </section>
+
+        <!-- Login History Table -->
+        <h2>Login History</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Login Date/Time</th>
+                    <th>Client Information</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (user.loginHistory && user.loginHistory.length > 0) { %>
+                    <% user.loginHistory.forEach(function(entry) { %>
+                        <tr>
+                            <td><%= new Date(entry.loginDateTime).toLocaleString() %></td>
+                            <td><%= entry.clientInfo.userAgent %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="2">No login history available.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p><a href="/">Back to Home</a></p>
+    </footer>
+</body>
+</html>
